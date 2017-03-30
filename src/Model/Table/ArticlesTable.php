@@ -30,13 +30,9 @@ class ArticlesTable extends Table
      */
     public function initialize(array $config)
     {
-        parent::initialize($config);
-
-        $this->setTable('articles');
-        $this->setDisplayField('title');
-        $this->setPrimaryKey('id');
-
         $this->addBehavior('Timestamp');
+        // Just add the belongsTo relation with CategoriesTable
+        $this->belongsTo('Categories', ['foreignKey' => 'category_id']);
     }
 
     /**
