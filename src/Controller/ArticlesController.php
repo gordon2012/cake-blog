@@ -10,6 +10,11 @@ use App\Controller\AppController;
  */
 class ArticlesController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Flash'); // Include the FlashComponent
+    }
 
     /**
      * Index method
@@ -49,17 +54,17 @@ class ArticlesController extends AppController
     public function add()
     {
         $article = $this->Articles->newEntity();
-        if ($this->request->is('post')) {
+        if($this->request->is('post'))
+        {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('The article has been saved.'));
-
+            if($this->Articles->save($article))
+            {
+                $this->Flash->success(__('Your article has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The article could not be saved. Please, try again.'));
+            $this->Flash->error(__('Unable to add your article.'));
         }
-        $this->set(compact('article'));
-        $this->set('_serialize', ['article']);
+        $this->set('article', $article);
     }
 
     /**
