@@ -76,20 +76,18 @@ class ArticlesController extends AppController
      */
     public function edit($id = null)
     {
-        $article = $this->Articles->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $article = $this->Articles->patchEntity($article, $this->request->getData());
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('The article has been saved.'));
-
+        $article = $this->Articles->get($id);
+        if($this->request->is(['post', 'put']))
+        {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if($this->Articles->save($article))
+            {
+                $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The article could not be saved. Please, try again.'));
+            $this->Flash->error(__('Unable to update your article.'));
         }
-        $this->set(compact('article'));
-        $this->set('_serialize', ['article']);
+        $this->set('article', $article);
     }
 
     /**

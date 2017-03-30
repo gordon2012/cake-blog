@@ -1,10 +1,11 @@
 <h1>Blog articles</h1>
-<?= $this->Html->link('Add Article', ['action' => 'add']) ?>
+<p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>
 <table>
     <tr>
         <th>Id</th>
         <th>Title</th>
         <th>Created</th>
+        <th>Action</th>
     </tr>
 
     <?php foreach ($articles as $article): ?>
@@ -15,6 +16,9 @@
         </td>
         <td>
             <?= $article->created->format(DATE_RFC850) ?>
+        </td>
+        <td>
+            <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
         </td>
     </tr>
     <?php endforeach; ?>
