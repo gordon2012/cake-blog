@@ -2,9 +2,9 @@
     <?= $this->Form->create($user) ?>
     <fieldset>
         <legend><?= __('Add User') ?></legend>
-            <? $this->Form->control('username') ?>
-            <? $this->Form->control('password') ?>
-            <? $this->Form->control('role', [
+            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('password') ?>
+            <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]) ?>
     </fieldset>
